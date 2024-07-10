@@ -1,0 +1,23 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background-color: whitesmoke;
+}
+
+.MuiDataGrid-cell{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swal2-popup {
+  font-size: 0.75rem !important;
+  z-index: 100 !important;
+}
+
+.MuiDrawer-root{
+  z-index: 99 !important;
+}
