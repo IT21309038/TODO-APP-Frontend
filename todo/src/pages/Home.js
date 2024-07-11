@@ -9,7 +9,7 @@ import {
   InputAdornment,
   Switch,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
@@ -321,31 +321,33 @@ const Home = () => {
       </Grid>
 
       <Grid item xs={12}>
-        <Card sx={{ boxShadow: 2 }}>
-          <Box
-            sx={{
-              height: 395,
-              width: "100%",
-              "& .actions": {
-                color: "text.secondary",
-              },
-              "& .textPrimary": {
-                color: "text.primary",
-              },
-            }}
-          >
-            <DataGrid
-              getRowHeight={() => "auto"}
-              rows={rows}
-              rowCount={recordCount}
-              columns={columns}
-              pageSizeOptions={[5, 10, 25, 50, 100]}
-              paginationModel={paginationModel}
-              onPaginationModelChange={setPaginationModel}
-              disableRowSelectionOnClick
-            />
-          </Box>
-        </Card>
+        <Box sx={{ mx: 2 }}>
+          <Card sx={{ boxShadow: 2 }}>
+            <Box
+              sx={{
+                height: 395,
+                width: "100%",
+                "& .actions": {
+                  color: "text.secondary",
+                },
+                "& .textPrimary": {
+                  color: "text.primary",
+                },
+              }}
+            >
+              <DataGrid
+                getRowHeight={() => "auto"}
+                rows={rows}
+                rowCount={recordCount}
+                columns={columns}
+                pageSizeOptions={[5, 10, 25, 50, 100]}
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
+                disableRowSelectionOnClick
+              />
+            </Box>
+          </Card>
+        </Box>
       </Grid>
 
       <Drawer anchor="right" open={addTodoOpen} onClose={handleAddTodoClose}>

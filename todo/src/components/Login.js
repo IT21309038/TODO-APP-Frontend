@@ -23,10 +23,6 @@ const Login = () => {
   const [userNameError, setUserNameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
-  const handleLoginRoute = () => {
-    navigate("/");
-  };
-
   const handleLogin = () => {
     let hasError = false;
     if (userName.trim() === "") {
@@ -45,45 +41,30 @@ const Login = () => {
 
     if (hasError) return;
 
-    Swal.fire({
-      title: "Login?",
-      showCancelButton: true,
-      confirmButtonText: "Login",
-      cancelButtonText: "Cancel",
-      customClass: {
-        popup: "swal2-popup",
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const payload = {
-          username: userName,
-          password: password,
-        };
+    const payload = {
+        username: userName,
+        password: password,
+    };
 
-        // console.log('Payload:', payload)
+    apiDefinitions
+      .postLogin(payload)
+      .then((res) => {
+        if (res.status === 200) {
+          const token = res.data.accessToken;
+          localStorage.setItem("token", token);
+          toast.success("Login Successful!");
+          login();
+        } else {
+          console.log("error");
+          toast.error(`Error: Login Failed!`);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Error Logging In!");
+      });
+};
 
-        apiDefinitions
-          .postLogin(payload)
-          .then((res) => {
-            if (res.status === 200) {
-              const token = res.data.accessToken;
-              localStorage.setItem("token", token);
-              toast.success("Login Successful!");
-              login();
-            } else {
-              console.log("error");
-              toast.error(`Error: Login Failed!`);
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-            toast.error("Error Logging In!");
-          });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire("Login Canceled", "", "info");
-      }
-    });
-  };
   return (
     <>
       <Box
